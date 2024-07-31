@@ -38,6 +38,10 @@ const Dashboard = () => {
     fetchUserShows();
   }, []);
 
+  // const handleShowClick = (show) => {
+  //   navigate("/mainpage", { state: { selectedShow: show } });
+  // };
+  
   return (
     <Container>
       <h1>Currently Watching</h1>
@@ -71,7 +75,6 @@ const Dashboard = () => {
 
 
 export default Dashboard;
-
 
 
 

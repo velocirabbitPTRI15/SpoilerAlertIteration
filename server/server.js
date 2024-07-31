@@ -11,6 +11,7 @@ const season = require('./seasonController.js');
 const episode = require('./episodeController.js');
 const session = require('./controllers/sessionController.js');
 const cookie = require('./controllers/cookieController.js');
+const comment = require('./controllers/commentController.js');
 
 app.use(express.static(path.resolve(__dirname, '../build')));
 
@@ -40,7 +41,9 @@ app.get('/getshow', show.getShow, (req, res) => {
 })
 
 
-
+app.get('/getcomments', comment.getComments, (req, res) => {
+  return res.status(200).json(res.locals.comments);
+})
 
 
 

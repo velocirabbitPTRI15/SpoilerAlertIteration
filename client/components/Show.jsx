@@ -189,7 +189,6 @@ const Show = () => {
         <Form.Control as="textarea" rows={3} value={commentInput} onChange={handleCommentInput} />
         {/* <Button onClick={handleSaveComment}>Comment</Button> */}
       </Form.Group>
-
       {/* render Comment component */}      
       {watchHistory.season && (
         <Comment 
