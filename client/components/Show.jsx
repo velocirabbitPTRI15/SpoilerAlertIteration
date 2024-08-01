@@ -66,17 +66,15 @@ const Show = () => {
   useEffect(()=> {
     const fetchWatchHistory = async () => {
       try {
-        const response = await fetch(`/getwatchhistory?show_id=${show_id}`); 
-        if (response.ok) {
-          const result = await response.json();
-          // TODO: update property name based on API's response format 
-          setWatchHistoryInput({
-            ...watchHistoryInput,
-            // TODO: update season and episode 
-            // season: xx,
-            // episode: xx,
-          });
-        }
+        const response = await fetch(`/xxx?show_id=${show_id}`); // TO DO: confirm endpoint 
+        const result = await response.json();
+        // TODO: update property name based on API's response format 
+        setWatchHistoryInput({
+          ...watchHistoryInput,
+          // TODO: update season and episode 
+          // season: '1',
+          // episode: '1',
+        }); 
       } catch (error) {
         console.log('Fetch error');
       }
@@ -98,32 +96,34 @@ const Show = () => {
   }
   
   // function to send a POST request to save user's watch history (season/episode) to database
-  const handleSaveWatchHistory = async (e) => {
+  const handleSaveWatchHistory = async () => {
     e.preventDefault();
     try{
       const placeData = {
         showId: show_id,
-        seasonNumber: watchHistoryInput.season,
-        episodeNumber: watchHistoryInput.episode,
+        seasonId: watchHistoryInput.season,
+        episodeID: watchHistoryInput.episode,
       }
-      console.log('placeData ', placeData)
       const response = await fetch('/saveplace', {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
-        },
-        body: JSON.stringify(placeData),
+          body: JSON.stringify({})
+        }
       });
+      if(response.ok) {
+        // 
+      }
 
     } catch (error){
         console.log('Error in handlWatchSaveHistory');
     }
+
   }
 
   // function to save a user's comment to DB by making a POST request to /xxx 
   // which is fired when a user clicks 'comment' button 
-  const handleSaveComment = async (e) => {
-    e.preventDefault(); 
+  const handleSaveComment = async () => {
     try {
       const commentInfo = {
         body: commentInput,
@@ -131,14 +131,14 @@ const Show = () => {
         season: watchHistoryInput.season,
         episode: watchHistoryInput.episode,
       }
-      const response = await fetch('/addcomment', { //TODO: update the endpoint
+      const response = await fetch('/xxxx', { //TODO: update the endpoint
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(commentInfo),
       })
-      setCommentInput('');
+
     } catch (error) {
       console.log('Fetch error')
     }
@@ -190,7 +190,7 @@ const Show = () => {
         </div>
   
         {/* display drop-down and save a user watch history (season and episode) */}
-        <h4 style={{ paddingLeft: "10px", fontFamily: "Ubuntu Condensed"}}>Which episode have you watched up to?</h4>
+        <h4 style={{ paddingLeft: "10px", fontFamily: "Ubuntu Condensed"}}>Add your watch history:</h4>
         <Form onSubmit={handleSaveWatchHistory}>
           <Form.Select 
             value={watchHistoryInput.season}
@@ -226,9 +226,22 @@ const Show = () => {
             type="submit" 
             disabled={!watchHistoryInput.season || !watchHistoryInput.episode}
           >
-            Save your watch history
+            Save
           </Button>
         </Form>
+
+        {/* Always render the season and episode, if unknown then render No watch hsitory available, please etc.  */}
+        <div style={{ marginTop: '20px', marginBottom: '20px' }}>
+            {watchHistoryInput.season && watchHistoryInput.episode ? (
+              <>
+                <h5 style={{ fontFamily: "Ubuntu Condensed" }}>You are on</h5> 
+                <p>Season: {watchHistoryInput.season}</p>
+                <p>Episode: {watchHistoryInput.episode}</p>
+              </>
+            ) : (
+              <p>No watch history available, please select a Season and Episode</p>
+            )}
+          </div>
   
         {/* add comment box - pulldown to select season/episode to add comments */}
         <h4 style={{ paddingLeft: "10px", fontFamily: "Ubuntu Condensed"}}>Comment to the show:</h4>
@@ -244,16 +257,14 @@ const Show = () => {
           </Button>
         </Form>
   
-        {/* render Comment component */}   
-        {!watchHistoryInput.season || !watchHistoryInput.episode ? (
-          <p style={{ textAlign: 'center', marginTop: '2rem', fontSize: '1.2rem' }}>Please save your watch history first to see comments.</p>
-        ) : ( 
+        {/* render Comment component */}      
+        {watchHistoryInput.season && (
           <Comment 
-          showId={show_id} 
-          season={watchHistoryInput.season} 
-          episode={watchHistoryInput.episode} 
+            showId={show_id} 
+            season={watchHistoryInput.season} 
+            episode={watchHistoryInput.episode} 
           />
-        )}  
+        )}
       </>
     )}
   </Container>
