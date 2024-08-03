@@ -9,7 +9,7 @@ A project originally by the Pink Armadillo Fairies, iterated on by Team Velocira
 - Chris Nash   https://github.com/chrisnash819
 - Colin Rooney   https://github.com/12mv2
 - Kevin Sullivan   https://github.com/kevinsullivan88
-- Justin Tran (Scrum Master)   https://github.com/12mv2
+- Justin Tran (Scrum Master)   https://github.com/justinvtran
 
 ## Special Thanks
 We would like to thank Edwin Morlu for their invaluable advice to this project.
