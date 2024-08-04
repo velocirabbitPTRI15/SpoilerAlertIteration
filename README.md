@@ -18,6 +18,10 @@ We would like to thank Edwin Morlu for their invaluable advice to this project.
 
 SpoilerAlert is a web application built using React, Redux, and Express. It's an iteration on the original project found at https://github.com/Pink-Armadillo-Fairies/SpoilerAlert. The main focus of this iteration was to refactor and simplify the codebase.
 
+## Vid walkthu of App
+
+- A walkthru of the App is in client/assets
+
 ### Original Project Features
 - Ability to comment on shows with friends without seeing spoilers for unwatched episodes
 - Included one static show, Bridgerton
